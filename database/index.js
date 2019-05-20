@@ -23,10 +23,10 @@ let store = (err, result) => {
 };
 
 let readOne = (req, callback) => {
-  console.log('req at database', req);
+  // console.log('req at database', req);
   Room.findOne({ listingId: req }, (err, obj) => {
     if (err) return console.log(err);
-    callback(null, obj.room);
+    callback(null, obj);
   });
 };
 module.exports = {
