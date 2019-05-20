@@ -1,12 +1,12 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import axios from 'axios';
+import Description from './Description.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null,
+      data: {},
     };
     this.addDescription = this.addDescription.bind(this);
   }
@@ -22,18 +22,17 @@ class App extends React.Component {
       },
     })
       .then((res) => {
-        console.log('res.data: ', res.data);
+        console.log('res.data.room: ', JSON.parse(res.data.room));
         this.setState({
-          data: res.data,
+          data: Object.assign({}, JSON.parse(res.data.room)),
         });
       });
   }
-// output
 
   render() {
     return (
       <div>
-        <p>test</p>
+        <Description rooms={this.state.data} />
       </div>
     );
   }
