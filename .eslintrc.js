@@ -4,13 +4,20 @@ module.exports = {
     es6: true,
     node: true,
     mongo: true,
+    jest: true,
   },
-  extends: 'airbnb',
+  extends: [
+    'airbnb',
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
   },
+  parser: 'babel-eslint',
   parserOptions: {
+    sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
     },
@@ -29,5 +36,7 @@ module.exports = {
     'consistent-return': 0,
     'no-unused-vars': 0,
     'no-shadow': 0,
+    "react/destructuring-assignment": 0,
+    "react/prop-types": 0,
   },
 };
