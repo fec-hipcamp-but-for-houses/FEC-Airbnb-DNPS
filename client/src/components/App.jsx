@@ -6,33 +6,32 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: {},
+      data: null,
     };
-    this.addDescription = this.addDescription.bind(this);
   }
 
   componentDidMount() {
-    this.addDescription();
-  }
-
-  addDescription() {
     axios.get('http://localhost:3004/rooms', {
       params: {
         listingId: 0,
       },
     })
       .then((res) => {
-        console.log('res.data.room: ', JSON.parse(res.data.room));
         this.setState({
-          data: Object.assign({}, JSON.parse(res.data.room)),
+          data: JSON.parse(res.data.room),
         });
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }
 
+
   render() {
+    console.log('houseType ', this.state.data);
     return (
       <div>
-        <Description rooms={this.state.data} />
+        {this.state.data && <Description rooms={this.state.data} />}
       </div>
     );
   }
