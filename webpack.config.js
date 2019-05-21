@@ -23,8 +23,30 @@ module.exports = {
       {
         test: [/\.css$/],
         include: SRC_DIR,
-        use: [{ loader: 'style-loader' }, { loader: 'style-loader' }],
-      }
+        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+      },
+      {
+        test: [/\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/],
+        include: SRC_DIR,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'fonts/',
+          },
+        }],
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+            },
+          },
+        ],
+      },
     ],
   },
 };
